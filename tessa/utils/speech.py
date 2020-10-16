@@ -75,6 +75,6 @@ class Speech():
 
     def closing(self):
         self.say(random.choice([
-            "It's faaie raabend. That was it for todays exercises. Tschusie tschusie.",
+            "You're done! That was it for todays exercises. Tschusie tschusie.",
 
         ]))

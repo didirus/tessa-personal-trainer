@@ -1,3 +1,2 @@
 reconplogger
-pandas
 jsonargparse

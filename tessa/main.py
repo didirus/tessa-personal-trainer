@@ -17,7 +17,7 @@ def main():
 
     for round in range(args.max_times):
 
-        if int(datetime.now().strftime("%H")) > args.feierabend:
+        if int(datetime.now().strftime("%H")) > args.finished_work_at:
             break
 
         pause = random.randint(args.min_pause, args.max_pause)
@@ -50,10 +50,10 @@ if __name__ == "__main__":
     parser.add_argument('--duration', type=int, action=ActionOperators(expr=('>', 15)), default=20, help='Seconds, duration of exercise.')
     parser.add_argument('--music.dir', action=ActionPath(mode='dr'), default=Path(os.path.join(str(libPath.home()), 'Music/iTunes/iTunes Media/Music'), mode='dr'), help='The root folder of your music files.')
     parser.add_argument('--music.vol', type=float, default=0.17, help='The volume of the music (exponential scale, where 0 is silent, 1 is normal, up to 255 for very loud.')
-    parser.add_argument('--feierabend', type=int, default=17, help='When are you finished with work and want to stop exercises.')
+    parser.add_argument('--finished_work_at', type=int, default=19, help='When are you finished with work and want to stop exercises.')
     parser.add_argument('--min_pause', type=int, default=0, help='Minutes, minimum how long your break between exercises takes.')
     parser.add_argument('--max_pause', type=int, default=0, help='Minutes, maximum how long your break between exercises takes.')
-    parser.add_argument('--silent', action=ActionYesNo, default=True, help='Wether you want to run Tessa in silent mode. Music is played anyway.')
+    parser.add_argument('--silent', action=ActionYesNo, default=False, help='Wether you want to run Tessa in silent mode. Music is played anyway.')
 
     args = parser.parse_args()
 

@@ -1,0 +1,9 @@
+max_times: 3
+warn_before: 30
+duration: 60
+music:
+  vol: 0.17
+#feierabend: 19
+min_pause: 45
+max_pause: 120
+silent: no

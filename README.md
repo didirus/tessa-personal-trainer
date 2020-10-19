@@ -24,7 +24,7 @@ Diede Rusticus(diede.rusticus@gmail.com)
     warn_before: 30
     duration: 60
     music:
-      dir: <your_music_directory>
+      dir: <path_to_your_music_directory>
       vol: 0.17
     finished_work_at: 19
     min_pause: 45

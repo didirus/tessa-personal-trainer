@@ -4,7 +4,7 @@ If you are spending a lot of time on your computer, either home or in an office,
 NOTE: only compatible for Mac user for now.
 
 ## Author
-Diede Rusticus(diede.rusticus@gmail.com)
+Diede Rusticus (diede.rusticus@gmail.com)
 
 ## How to use
 

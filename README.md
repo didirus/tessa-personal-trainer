@@ -6,6 +6,11 @@ NOTE: only compatible for Mac user for now.
 ## Author
 Diede Rusticus (diede.rusticus@gmail.com)
 
+## Prerequisites
+- For Mac only 
+- Make sure you have "Claire" and "Moira" downloaded as computer voices. 
+  Go to `Settings > Accessibility > Speech > Customize` to download these voices. 
+
 ## How to use
 
 1. Install requirements (optionally: inside a virtual environment).
@@ -25,7 +30,7 @@ Diede Rusticus (diede.rusticus@gmail.com)
     duration_exercise: 60  # seconds
     duration_breath: 120  # seconds
     music:
-    #  dir: /path/to/your/music/directory
+    #  dir: /path/to/your/music/directory  
       vol: 0.17
     finished_work_at: 19  # o'clock
     min_pause: 30  # minutes
@@ -33,6 +38,8 @@ Diede Rusticus (diede.rusticus@gmail.com)
     silent: no
 
    ```
+   *Note: For the full experience, make sure you have access to some `mp3` files on your laptop and outcomment the `dir` line in the `config.yaml` file and set it to the path of your music directory. You can also use the parameter `--music.dir` for this. 
+
 3. Run Tessa.
 
     ```

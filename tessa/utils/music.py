@@ -18,4 +18,4 @@ class Music():
     def play_song(self):
         song = random.choice(self.songs)
         logger.info(f"Playing song: '{song.split('/')[-1].split('.mp3')[0]}'")
-        subprocess.Popen(["timeout", '{}s'.format(self.cfg.duration), "afplay", "-v", str(self.cfg.music.vol), song])
+        subprocess.Popen(["timeout", '{}s'.format(self.cfg.duration_exercise), "afplay", "-v", str(self.cfg.music.vol), song])

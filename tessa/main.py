@@ -13,9 +13,7 @@ from utils.music import Music
 
 def exercise_round():
 
-
-
-    speech.startlines()
+    task = speech.start_round()
     speech.give_option()
     if input("Do you have time right now? [y/n]: ").lower() != 'y':
         speech.delay()
@@ -23,39 +21,46 @@ def exercise_round():
     else: speech.no_delay()
     time.sleep(max(0, args.warn_before - 5))
 
-    speech.say('In 5, 4, 3, 2, 1, Go!')
+    speech.say(f"Okay, ready for some {task}?. In 5, 4, 3, 2, 1, Go!")
 
     music.play_song()
 
     now = time.time()
-    time.sleep((args.duration - 5) / 2)
+    time.sleep((args.duration_exercise - 5) / 2)
     speech.motivation()
 
-    time.sleep((args.duration - 5 - (time.time() - now) - 2))
+    time.sleep((args.duration_exercise - 5 - (time.time() - now) - 2))
     speech.almost_done()
 
-    time.sleep(args.duration - (time.time() - now))
+    time.sleep(args.duration_exercise - (time.time() - now))
     speech.well_done()
 
     return True
+
+
+def random_pause():
+    time.sleep(args.duration_breath)
+    pause = random.randint(args.min_pause, args.max_pause)
+    speech.next_exercise(pause)
+    time.sleep(pause * 60)
+
 
 def main():
 
     speech.greetings()
     speech.intro()
     speech.explanations()
-
+    time.sleep(args.duration_breath)
     exercise_round()
 
     for round in range(args.max_times):
         if int(datetime.now().strftime("%H")) > args.finished_work_at:
             break
 
-        pause = random.randint(args.min_pause, args.max_pause)
-        speech.next_exercise(pause)
-        time.sleep(pause * 60)
+        random_pause()
 
         if not exercise_round():
+            random_pause()
             exercise_round()
 
     speech.closing()
@@ -65,9 +70,10 @@ if __name__ == "__main__":
 
     parser = ArgumentParser()
     parser.add_argument('--cfg', action=ActionConfigFile)
+    parser.add_argument('--duration_breath', type=int, default=0, help='Number of seconds that Tessa takes a breath before announcing the next exercise.')
     parser.add_argument('--max_times', type=int, default=3, help='The number of exercises per day.')
     parser.add_argument('--warn_before', type=int, default=6, help='Seconds, before exercise starts, you get a warning.')
-    parser.add_argument('--duration', type=int, action=ActionOperators(expr=('>', 15)), default=20, help='Seconds, duration of exercise.')
+    parser.add_argument('--duration_exercise', type=int, action=ActionOperators(expr=('>', 15)), default=20, help='Seconds, duration of exercise.')
     parser.add_argument('--music.dir', action=ActionPath(mode='dr'), default=Path(os.path.join(str(libPath.home()), 'Music/iTunes/iTunes Media/Music'), mode='dr'), help='The root folder of your music files.')
     parser.add_argument('--music.vol', type=float, default=0.17, help='The volume of the music (exponential scale, where 0 is silent, 1 is normal, up to 255 for very loud.')
     parser.add_argument('--finished_work_at', type=int, default=19, help='When are you finished with work and want to stop exercises.')

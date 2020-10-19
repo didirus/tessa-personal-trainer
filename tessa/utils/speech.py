@@ -13,6 +13,7 @@ class Speech():
     def say(self, sentence):
         logger.info(f"Saying '{sentence}'.")
         if not self.cfg.silent:
+            subprocess.call(['say', 'hey'])
             subprocess.call(['say', sentence])
 
     def greetings(self):
@@ -35,24 +36,28 @@ class Speech():
             f"I have {self.cfg.max_times} exercises in store for you today.",
         ]))
 
-    def startlines(self):
-        self.say(random.choice([
-            f'Allright ladies, in {self.cfg.warn_before} seconds, we will plank for {self.cfg.duration} seconds!',
+    def start_round(self):
+        task = random.choice([
+            ['wall-sitting',
+             f"In {self.cfg.warn_before} seconds, let's find a piece of wall, and do {self.cfg.duration_exercise} seconds "
+            f"of wall sitting"],
 
-            f"In {self.cfg.warn_before} seconds, let's find a piece of wall, and do {self.cfg.duration} seconds "
-            f"of wall sitting",
+            ['shoulder and arm stretching',
+             f'In {self.cfg.warn_before} seconds, we will do {self.cfg.duration_exercise} seconds of shoulder and '
+            f'arm stretching'],
 
-            f'In {self.cfg.warn_before} seconds, we will do {self.cfg.duration} seconds of shoulder and '
-            f'arm stretching',
+            ['planking',
+             f'Yes ladies, in {self.cfg.warn_before} seconds, face the ground, and give me a strong plank for '
+            f'{self.cfg.duration_exercise} seconds!'],
 
-            f'Yes, in {self.cfg.warn_before} seconds, face the ground, and give me a strong plank for '
-            f'{self.cfg.duration} seconds!',
+            ['squating',
+             f"Get ready. In {self.cfg.warn_before} seconds, we are doing deep squats for {self.cfg.duration_exercise} seconds."],
 
-            f"Get ready. In {self.cfg.warn_before} seconds, we are doing deep squats for {self.cfg.duration} seconds.",
-
-            f"{self.cfg.warn_before} seconds left before we will stand up, close our eyes, and slowly roll our necks around in our shoulders. "
-
-        ]))
+            ['neck rolling',
+             f"{self.cfg.warn_before} seconds left before we will stand up, close our eyes, and slowly roll our neck, in our shoulders. "]
+        ])
+        self.say(task[1])
+        return task[0]
 
     def give_option(self):
         self.say(random.choice([
@@ -62,26 +67,23 @@ class Speech():
 
     def delay(self):
         self.say(random.choice([
-            "No worries, let's postpone it.",
-            "That's okay.",
-            "I won't take it personally.",
-            "Lazy you."
+            "No? Then, let's postpone it.",
+            "No? That's okay.",
+            "No? I won't take it personally.",
+            "No? Lazy you."
         ]))
 
     def no_delay(self):
         self.say(random.choice([
-            "Great.",
-            "That's the spirit.",
-            "Allrighty then.",
-            "You go girl!"
+            "Yes? Great.",
+            "Yes? That's the spirit.",
+            "Yes? Allrighty then.",
+            "Yes? You go girl!"
         ]))
 
     def next_exercise(self, pause):
-        next_exercise = datetime.now() + timedelta(minutes=pause)
         self.say(random.choice([
-            f"Next exercise starts at {int(next_exercise.strftime('%M'))} past "
-            f"{int(next_exercise.strftime('%H')) if int(next_exercise.strftime('%H')) < 12 else int(next_exercise.strftime('%H')) - 12} "
-            f"(in {int(pause)} minute{'s' if pause != 1 else ''})...",
+            f"Prepare for action, in {int(pause)} minute{'s' if pause != 1 else ''} ...",
         ]))
 
     def motivation(self):
@@ -107,7 +109,7 @@ class Speech():
     def well_done(self):
         self.say(random.choice([
             'Nice. Thank you for your contribution.',
-            'Great job! Cardiovascular exercise helps create new brain cells.',
+            'Great job! We just created new brain cells.',
             'Awesome.'
             'Proud is what I am.'
         ]))

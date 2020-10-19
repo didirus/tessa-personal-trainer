@@ -2,6 +2,7 @@ max_times: 5
 warn_before: 30
 duration: 60
 music:
+  dir: /path/to/your/music/directory
   vol: 0.17
 finished_work_at: 19
 min_pause: 45

@@ -13,7 +13,7 @@ class Speech():
     def say(self, sentence):
         logger.info(f"Saying '{sentence}'.")
         if not self.cfg.silent:
-            subprocess.call(['say', 'hey'])
+            subprocess.call(['afplay', 'silence.wav'])
             subprocess.call(['say', sentence])
 
     def greetings(self):
@@ -27,7 +27,7 @@ class Speech():
 
     def intro(self):
         self.say(random.choice([
-            "It's me: Tessa, your personal trainer."
+            "It's me: Roisin, your personal trainer."
         ]))
 
     def explanations(self):
@@ -110,7 +110,7 @@ class Speech():
         self.say(random.choice([
             'Nice. Thank you for your contribution.',
             'Great job! We just created new brain cells.',
-            'Awesome.'
+            'Awesome.',
             'Proud is what I am.'
         ]))
 

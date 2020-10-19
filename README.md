@@ -21,15 +21,17 @@ Diede Rusticus (diede.rusticus@gmail.com)
     # config.yaml
     
     max_times: 5
-    warn_before: 30
-    duration: 60
+    warn_before: 30  # seconds
+    duration_exercise: 60  # seconds
+    duration_breath: 120  # seconds
     music:
-      dir: /path/to/your/music/directory
+    #  dir: /path/to/your/music/directory
       vol: 0.17
-    finished_work_at: 19
-    min_pause: 30
-    max_pause: 60
+    finished_work_at: 19  # o'clock
+    min_pause: 30  # minutes
+    max_pause: 60  # minutes
     silent: no
+
    ```
 3. Run Tessa.
 

@@ -13,9 +13,7 @@ from utils.music import Music
 
 def exercise_round():
 
-    pause = random.randint(args.min_pause, args.max_pause)
-    speech.next_exercise(pause)
-    time.sleep(pause * 60)
+
 
     speech.startlines()
     speech.give_option()
@@ -47,9 +45,16 @@ def main():
     speech.intro()
     speech.explanations()
 
+    exercise_round()
+
     for round in range(args.max_times):
         if int(datetime.now().strftime("%H")) > args.finished_work_at:
             break
+
+        pause = random.randint(args.min_pause, args.max_pause)
+        speech.next_exercise(pause)
+        time.sleep(pause * 60)
+
         if not exercise_round():
             exercise_round()
 

@@ -50,7 +50,7 @@ class Speech():
 
             f"Get ready. In {self.cfg.warn_before} seconds, we are doing deep squats for {self.cfg.duration} seconds.",
 
-            f"{self.cfg.warn_before} seconds left before we will stand up, close our eyes, and roll your neck around in your shoulders. "
+            f"{self.cfg.warn_before} seconds left before we will stand up, close our eyes, and slowly roll our necks around in our shoulders. "
 
         ]))
 
@@ -58,12 +58,11 @@ class Speech():
         self.say(random.choice([
             "Do you have time right now? Yes or No?",
             "Are you up for it? Yes or No?",
-
         ]))
 
     def delay(self):
         self.say(random.choice([
-            "No worries, I will postpone it.",
+            "No worries, let's postpone it.",
             "That's okay.",
             "I won't take it personally.",
             "Lazy you."

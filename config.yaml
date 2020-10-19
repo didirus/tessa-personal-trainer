@@ -5,6 +5,6 @@ music:
   dir: /path/to/your/music/directory
   vol: 0.17
 finished_work_at: 19
-min_pause: 45
-max_pause: 120
+min_pause: 30
+max_pause: 60
 silent: no

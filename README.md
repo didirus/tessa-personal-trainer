@@ -25,6 +25,7 @@ Diede Rusticus (diede.rusticus@gmail.com)
     ```
     # config.yaml
     
+    lang: eng
     max_times: 5
     warn_before: 30  # seconds
     duration_exercise: 60  # seconds

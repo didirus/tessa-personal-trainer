@@ -20,7 +20,8 @@ class Speech():
             'Good morning, you.',
             'Konnichiwa.',
             'Hey, how is it going?',
-            'Goede middag!'
+            'Goede middag!',
+            'Hello there!'
         ]))
 
     def intro(self):
@@ -31,20 +32,57 @@ class Speech():
     def explanations(self):
         self.say(random.choice([
             f"Today, we'll do {self.cfg.max_times} exercises.",
+            f"I have {self.cfg.max_times} exercises in store for you today.",
         ]))
 
     def startlines(self):
         self.say(random.choice([
             f'Allright ladies, in {self.cfg.warn_before} seconds, we will plank for {self.cfg.duration} seconds!',
-            f'In {self.cfg.warn_before} seconds, let us all find a piece of wall, and do {self.cfg.duration} seconds of wall sitting',
-            f'In {self.cfg.warn_before} seconds, we will stand up and do {self.cfg.duration} seconds of shoulder and arm stretching',
-            f'Yes yes yes, in {self.cfg.warn_before} seconds, face the ground, and give me a strong plank for {self.cfg.duration} seconds!',
+
+            f"In {self.cfg.warn_before} seconds, let's find a piece of wall, and do {self.cfg.duration} seconds "
+            f"of wall sitting",
+
+            f'In {self.cfg.warn_before} seconds, we will do {self.cfg.duration} seconds of shoulder and '
+            f'arm stretching',
+
+            f'Yes, in {self.cfg.warn_before} seconds, face the ground, and give me a strong plank for '
+            f'{self.cfg.duration} seconds!',
+
+            f"Get ready. In {self.cfg.warn_before} seconds, we are doing deep squats for {self.cfg.duration} seconds.",
+
+            f"{self.cfg.warn_before} seconds left before we will stand up, close our eyes, and roll your neck around in your shoulders. "
+
+        ]))
+
+    def give_option(self):
+        self.say(random.choice([
+            "Do you have time right now? Yes or No?",
+            "Are you up for it? Yes or No?",
+
+        ]))
+
+    def delay(self):
+        self.say(random.choice([
+            "No worries, I will postpone it.",
+            "That's okay.",
+            "I won't take it personally.",
+            "Lazy you."
+        ]))
+
+    def no_delay(self):
+        self.say(random.choice([
+            "Great.",
+            "That's the spirit.",
+            "Allrighty then.",
+            "You go girl!"
         ]))
 
     def next_exercise(self, pause):
         next_exercise = datetime.now() + timedelta(minutes=pause)
         self.say(random.choice([
-            f"Next exercise starts at {int(next_exercise.strftime('%M'))} past {int(next_exercise.strftime('%H')) if int(next_exercise.strftime('%H')) < 12 else int(next_exercise.strftime('%H')) - 12} (in {int(pause)} minute{'s' if pause != 1 else ''})...",
+            f"Next exercise starts at {int(next_exercise.strftime('%M'))} past "
+            f"{int(next_exercise.strftime('%H')) if int(next_exercise.strftime('%H')) < 12 else int(next_exercise.strftime('%H')) - 12} "
+            f"(in {int(pause)} minute{'s' if pause != 1 else ''})...",
         ]))
 
     def motivation(self):
@@ -52,7 +90,7 @@ class Speech():
             'GO GO GO GO GO!',
             'I cannot believe my eyes!',
             'Well done guys, keep it up!',
-            'Come on, My mother can do a better job then you!',
+            'Come on, my mother even does a better job!',
         ]))
 
     def almost_done(self):
@@ -63,6 +101,7 @@ class Speech():
             '5 seconds left. You almost make me proud',
             '5 seconds left. Feel those muscles',
             '5 seconds left. Breathe in, breathe out',
+            '5 seconds left. Enjoy the feeling in your nerves',
 
         ]))
 
@@ -71,6 +110,7 @@ class Speech():
             'Nice. Thank you for your contribution.',
             'Great job! Cardiovascular exercise helps create new brain cells.',
             'Awesome.'
+            'Proud is what I am.'
         ]))
 
     def closing(self):

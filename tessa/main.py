@@ -2,12 +2,44 @@ from jsonargparse import ArgumentParser, ActionPath, Path, ActionYesNo, ActionOp
 from pathlib import Path as libPath
 import os
 import time
+import select
+import sys
 from datetime import datetime
 import random
 
 from utils.speech import Speech
 from utils.music import Music
 
+
+def exercise_round():
+
+    pause = random.randint(args.min_pause, args.max_pause)
+    speech.next_exercise(pause)
+    time.sleep(pause * 60)
+
+    speech.startlines()
+    speech.give_option()
+    if input("Do you have time right now? [y/n]: ").lower() != 'y':
+        speech.delay()
+        return False
+    else: speech.no_delay()
+    time.sleep(max(0, args.warn_before - 5))
+
+    speech.say('In 5, 4, 3, 2, 1, Go!')
+
+    music.play_song()
+
+    now = time.time()
+    time.sleep((args.duration - 5) / 2)
+    speech.motivation()
+
+    time.sleep((args.duration - 5 - (time.time() - now) - 2))
+    speech.almost_done()
+
+    time.sleep(args.duration - (time.time() - now))
+    speech.well_done()
+
+    return True
 
 def main():
 
@@ -16,27 +48,10 @@ def main():
     speech.explanations()
 
     for round in range(args.max_times):
-
         if int(datetime.now().strftime("%H")) > args.finished_work_at:
             break
-
-        pause = random.randint(args.min_pause, args.max_pause)
-        speech.next_exercise(pause)
-        time.sleep(pause*60)
-
-        speech.startlines()
-        time.sleep(max(0, args.warn_before - 5))
-
-        speech.say('In 5, 4, 3, 2, 1, Go!')
-
-        music.play_song()
-        now = time.time()
-        time.sleep((args.duration - 5) / 2)
-        speech.motivation()
-        time.sleep((args.duration - 5 - (time.time()-now) - 2))
-        speech.almost_done()
-        time.sleep(args.duration - (time.time()-now))
-        speech.well_done()
+        if not exercise_round():
+            exercise_round()
 
     speech.closing()
 

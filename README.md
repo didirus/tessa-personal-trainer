@@ -20,15 +20,15 @@ Diede Rusticus (diede.rusticus@gmail.com)
     ```
     # config.yaml
     
-    max_times: 3
+    max_times: 5
     warn_before: 30
     duration: 60
     music:
-      dir: <path_to_your_music_directory>
+      dir: /path/to/your/music/directory
       vol: 0.17
     finished_work_at: 19
-    min_pause: 45
-    max_pause: 120
+    min_pause: 30
+    max_pause: 60
     silent: no
    ```
 3. Run Tessa.

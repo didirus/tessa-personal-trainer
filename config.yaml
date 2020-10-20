@@ -1,5 +1,5 @@
 lang: eng
-max_times: 5
+max_times: 10
 warn_before: 30  # seconds
 duration_exercise: 60  # seconds
 duration_breath: 120  # seconds
@@ -10,3 +10,4 @@ finished_work_at: 19  # o'clock
 min_pause: 30  # minutes
 max_pause: 60  # minutes
 silent: no
+skip_intro: no

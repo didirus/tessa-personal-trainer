@@ -12,13 +12,12 @@ from utils.music import Music
 
 
 def exercise_round():
-
-    speech.start_round()
     speech.give_option()
-    if input("Do you have time right now? [y/n]: ").lower() != 'y':
+    if input("Time for an exercise right now? [y/n]: ").lower() != 'y':
         speech.delay()
         return False
     else: speech.no_delay()
+    speech.start_round()
     time.sleep(max(0, args.warn_before - 5))
 
     speech.count_down()
@@ -82,7 +81,7 @@ if __name__ == "__main__":
     parser.add_argument('--min_pause', type=int, default=0, help='Minutes, minimum how long your break between exercises takes.')
     parser.add_argument('--max_pause', type=int, default=0, help='Minutes, maximum how long your break between exercises takes.')
     parser.add_argument('--silent', action=ActionYesNo, default=False, help='Wether you want to run Tessa in silent mode. Music is played anyway.')
-
+    parser.add_argument('--skip_intro', action=ActionYesNo, default=True, help='If you want to restart Tessa and skip the intro.')
     args = parser.parse_args()
 
     speech = Speech(args)

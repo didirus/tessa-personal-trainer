@@ -24,19 +24,20 @@ Diede Rusticus (diede.rusticus@gmail.com)
 
     ```
     # config.yaml
-    
+   
     lang: eng
-    max_times: 5
+    max_times: 10
     warn_before: 30  # seconds
     duration_exercise: 60  # seconds
     duration_breath: 120  # seconds
     music:
-    #  dir: /path/to/your/music/directory  
-      vol: 0.17
+    #  dir: /path/to/your/music/directory
+      vol: 0.18
     finished_work_at: 19  # o'clock
     min_pause: 30  # minutes
     max_pause: 60  # minutes
     silent: no
+    skip_intro: no
 
    ```
    *Note: For the full experience, make sure you have access to some `mp3` files on your laptop and outcomment the `dir` line in the `config.yaml` file and set it to the path of your music directory. You can also use the parameter `--music.dir` for this. 

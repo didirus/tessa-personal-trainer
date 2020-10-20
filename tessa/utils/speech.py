@@ -17,6 +17,8 @@ class Speech():
             subprocess.call(['say', '-v', f'{"Moira" if self.cfg.lang == "eng" else "Claire"}',  sentence[self.cfg.lang]])
 
     def greetings(self):
+        if self.cfg.skip_intro:
+            return
         self.say(random.choice([
             {"eng": "Good morning you.",
              "nl": "Goeie morgen jij."},
@@ -31,12 +33,16 @@ class Speech():
         ]))
 
     def intro(self):
+        if self.cfg.skip_intro:
+            return
         self.say(random.choice([
             {"eng": "It's me. Roisin. Your Irish personal trainer.",
              "nl": "Ik ben het. Claire. Jouw Nederlandse persoonlijke trainer"}
         ]))
 
     def explanations(self):
+        if self.cfg.skip_intro:
+            return
         self.say(random.choice([
             {"eng": f"Today, we'll do {self.cfg.max_times} exercises.",
              "nl": f"Vandaag, doen we {self.cfg.max_times} oefeningen."},
@@ -86,13 +92,12 @@ class Speech():
 
     def count_down(self):
         self.say(random.choice([
-            {"eng": f"Okay, ready for some {self.task[0][self.cfg.lang]}?. In 5, 4, 3, 2, 1, Go!",
-             "nl": f"Oke, klaar voor wat {self.task[0][self.cfg.lang]}? In 5, 4, 3, 2, 1, Go!"}]))
+            {"eng": f"Okay, let's {self.task[0][self.cfg.lang]}, in 5, 4, 3, 2, 1, go!",
+             "nl": f"Oke, laten we {self.task[0][self.cfg.lang]}, in 5, 4, 3, 2, 1, go!"}]))
 
     def give_option(self):
         self.say(random.choice([
-            {"eng": "Do you have time right now? Yes or No?", "nl": "Heb je nu tijd? Ja, of nee?"},
-            {"eng": "Are you up for it? Yes or No?", "nl": "Komt het uit? Ja, of nee?"},
+            {"eng": "Are you ready to move? Yes or No?", "nl": "Ben je er klaar voor? Ja of Nee."},
         ]))
 
     def delay(self):

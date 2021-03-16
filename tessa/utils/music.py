@@ -10,6 +10,7 @@ class Music():
     def __init__(self, cfg):
         self.cfg = cfg
         self.songs = self._get_songs()
+        logger.info("Songs loaded.")
 
     def _get_songs(self):
         songs = [os.path.join(d, song) for d, _, f in os.walk(self.cfg.music.dir()) for song in f if '.mp3' in song]

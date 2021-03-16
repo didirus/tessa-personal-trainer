@@ -1,2 +1,4 @@
-reconplogger
-jsonargparse
+reconplogger>=4.4.0
+jsonargparse>=2.32.2
+easygui>=0.98.2
+

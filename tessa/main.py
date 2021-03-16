@@ -2,8 +2,7 @@ from jsonargparse import ArgumentParser, ActionPath, Path, ActionYesNo, ActionOp
 from pathlib import Path as libPath
 import os
 import time
-import select
-import sys
+import easygui
 from datetime import datetime
 import random
 
@@ -13,8 +12,7 @@ from utils.music import Music
 
 def exercise_round():
     speech.give_option()
-    if input("Time for an exercise right now? [y/n]: ").lower() != 'y':
-        speech.delay()
+    if easygui.buttonbox("Time for an exercise right now?", 'Personal Trainer', ('Yes', 'No')) != 'Yes':
         return False
     else: speech.no_delay()
     speech.start_round()
@@ -39,7 +37,9 @@ def exercise_round():
 
 def random_pause():
     time.sleep(args.duration_breath)
-    pause = random.randint(args.min_pause, args.max_pause)
+    pause = 5 * round(random.randint(args.min_pause, args.max_pause)/5)
+    if pause == 0:
+        pause = 5
     speech.next_exercise(pause)
     time.sleep(pause * 60)
 
@@ -48,11 +48,14 @@ def main():
 
     speech.greetings()
     speech.intro()
+
+    # Only during working hours
     if int(datetime.now().strftime("%H")) < args.finished_work_at - 1:
         speech.explanations()
-        time.sleep(args.duration_breath)
+        time.sleep(30)
         exercise_round()
 
+        # Start exercise round
         for round in range(args.max_times):
             if int(datetime.now().strftime("%H")) > args.finished_work_at - 1:
                 break
@@ -86,5 +89,4 @@ if __name__ == "__main__":
 
     speech = Speech(args)
     music = Music(args)
-
     main()

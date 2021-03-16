@@ -9,6 +9,7 @@ class Speech():
     def __init__(self, cfg):
         self.cfg = cfg
         self.task = None
+        logger.info("Speech loaded.")
 
     def say(self, sentence):
         logger.info(f"Saying '{sentence[self.cfg.lang]}'.")
@@ -36,8 +37,8 @@ class Speech():
         if self.cfg.skip_intro:
             return
         self.say(random.choice([
-            {"eng": "It's me. Roisin. Your Irish personal trainer.",
-             "nl": "Ik ben het. Claire. Jouw Nederlandse persoonlijke trainer"}
+            {"eng": "It's me. Roisin. Your personal trainer.",
+             "nl": "Ik ben het. Claire. Jouw persoonlijke trainer"}
         ]))
 
     def explanations(self):
@@ -52,7 +53,7 @@ class Speech():
 
     def start_round(self):
         self.task = random.choice([
-            [{"eng": "wall-sitting",
+            [{"eng": "wall-sit",
               "nl": "muur-zitten"},
              {
                  "eng": f"In {self.cfg.warn_before} seconds, let's find a piece of wall, "
@@ -61,30 +62,29 @@ class Speech():
                  "nl": f"In {self.cfg.warn_before} seconden, zoek een stukje muur voor {self.cfg.duration_exercise} "
                        f"seconden muur-zitten."}],
 
-            [{"eng": "shoulder and arm stretching",
-              "nl": "schouder en arm stretsjes"},
+            [{"eng": "stretch the upperbody",
+              "nl": "het bovenlichaam stretchen"},
              {
                  "eng": f"In {self.cfg.warn_before} seconds, we will do {self.cfg.duration_exercise} seconds of shoulder and "
                         f"arm stretching",
-                 "nl": f"In {self.cfg.warn_before} seconden, doen we {self.cfg.duration_exercise} seconden schouder en arm stretsjes."}],
+                 "nl": f"In {self.cfg.warn_before} seconden, doen we {self.cfg.duration_exercise} seconden schouder, arm en nek stretsjes."}],
 
-            [{"eng": "planking", "nl": "planken"},
+            [{"eng": "plank", "nl": "planken"},
              {
                  "eng": f'Yes ladies, in {self.cfg.warn_before} seconds, face the ground, and give me a strong plank for '
                         f'{self.cfg.duration_exercise} seconds!',
                  "nl": f"Ja dames, in {self.cfg.warn_before} seconden, geef mij een stevige plank voor {self.cfg.duration_exercise} seconden!"}],
 
-            [{"eng": 'squating', "nl": 'skwatten'},
+            [{"eng": 'squat', "nl": 'skwatten'},
              {
                  "eng": f"Get ready. In {self.cfg.warn_before} seconds, we are doing deep squats for "
                         f"{self.cfg.duration_exercise} seconds.",
                  "nl": f"Maak je klaar. In {self.cfg.warn_before} seconden, doen we diepe squats voor {self.cfg.duration_exercise} seconden."}],
 
-            [{"eng": 'neck rolling', "nl": 'nek rollen'},
+            [{"eng": 'stretch the lowerbody', "nl": 'het onderlichaam stretsjen'},
              {
-                 "eng": f"{self.cfg.warn_before} seconds left before we will stand up, close our eyes, and slowly roll our neck, "
-                        f"in our shoulders. ",
-                 "nl": f"Nog {self.cfg.warn_before} seconden voordat we gaan staan, onze ogen sluiten, en langzaam onze nek in onze schouders laten rollen."}],
+                 "eng": f"{self.cfg.warn_before} seconds left before we will stand up, and stretch those calfs, shins, and upperlegs.",
+                 "nl": f"Nog {self.cfg.warn_before} seconden voordat we gaan staan, en been oefeningen gaan doen."}],
 
         ])
         self.say(self.task[1])
@@ -100,28 +100,16 @@ class Speech():
             {"eng": "Are you ready to move? Yes or No?", "nl": "Ben je er klaar voor? Ja of Nee."},
         ]))
 
-    def delay(self):
-        self.say(random.choice([
-            {"eng": "No? Then, let's postpone it.",
-            "nl": "Nee? Dan stellen we het even uit."},
-            {"eng": "No? That's okay.",
-             "nl": "Nee? Dat is oké."},
-            {"eng": "No? I won't take it personally.",
-             "nl": "Nee? Ik neem het niet persoonlijk."},
-            {"eng": "No? Lazy you.",
-             "nl": "Nee? Luilak!"}
-        ]))
-
     def no_delay(self):
         self.say(random.choice([
-            {"eng": "Yes? Great.",
-            "nl": "Ja? Goed."},
-            {"eng": "Yes? That's the spirit.",
-            "nl": "Ja? Dat is de spirit!"},
-            {"eng": "Yes? Allrighty then.",
-            "nl": "Ja? Goed dan."},
-            {"eng": "Yes? You go girl!",
-            "nl": "Ja? Geweldig meid!"},
+            {"eng": "Great.",
+            "nl": "Goed."},
+            {"eng": "That's the spirit.",
+            "nl": "Dat is de spirit!"},
+            {"eng": "Allrighty then.",
+            "nl": "Joepie!"},
+            {"eng": "You go girl!",
+            "nl": "Geweldig!"},
 
         ]))
 
@@ -167,7 +155,7 @@ class Speech():
             {"eng": 'Nice. Thank you for your contribution.',
             "nl": "Super. Bedankt voor deze bijdrage."},
             {"eng": 'Great job! We just created new brain cells.',
-            "nl": "Geweldig gedaan! Je hebt wel duizend nieuwe hersen cellen aangemaakt."},
+            "nl": "Geweldig gedaan!"},
             {"eng": 'Awesome.',
             "nl": "Ongelovelijk goed."},
             {"eng": 'Proud. So proud..',

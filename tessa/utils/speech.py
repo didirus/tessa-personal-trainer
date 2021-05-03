@@ -14,7 +14,7 @@ class Speech():
     def say(self, sentence):
         logger.info(f"Saying '{sentence[self.cfg.lang]}'.")
         if not self.cfg.silent:
-            subprocess.call(['afplay', 'silence.wav'])
+            subprocess.call(['afplay', './tessa/files/silence.wav'])
             subprocess.call(['say', '-v', f'{"Moira" if self.cfg.lang == "eng" else "Claire"}',  sentence[self.cfg.lang]])
 
     def greetings(self):

@@ -10,7 +10,7 @@ from utils.speech import Speech
 from utils.music import Music
 
 
-def exercise_round():
+def exercise_round(args, speech, music):
     speech.give_option()
     if easygui.buttonbox("Time for an exercise right now?", 'Personal Trainer', ('Yes', 'No')) != 'Yes':
         return False
@@ -35,7 +35,7 @@ def exercise_round():
     return True
 
 
-def random_pause():
+def random_pause(args, speech):
     time.sleep(args.duration_breath)
     pause = 5 * round(random.randint(args.min_pause, args.max_pause)/5)
     if pause == 0:
@@ -44,7 +44,7 @@ def random_pause():
     time.sleep(pause * 60)
 
 
-def main():
+def start(args, speech, music):
 
     speech.greetings()
     speech.intro()
@@ -53,7 +53,7 @@ def main():
     if int(datetime.now().strftime("%H")) < args.finished_work_at - 1:
         speech.explanations()
         time.sleep(30)
-        exercise_round()
+        exercise_round(args, speech, music)
 
         # Start exercise round
         for round in range(args.max_times):
@@ -62,31 +62,45 @@ def main():
 
             random_pause()
 
-            if not exercise_round():
+            if not exercise_round(args, speech, music):
                 random_pause()
-                exercise_round()
+                exercise_round(args, speech, music)
 
     speech.closing()
 
 
-if __name__ == "__main__":
-
+def main():
     parser = ArgumentParser()
     parser.add_argument('--cfg', action=ActionConfigFile)
     parser.add_argument('--lang', choices=['eng', 'nl'], nargs='?', default='nl', help='The language you want to hear.')
-    parser.add_argument('--duration_breath', type=int, default=0, help='Number of seconds that Tessa takes a breath before announcing the next exercise.')
+    parser.add_argument('--duration_breath', type=int, default=0,
+                        help='Number of seconds that Tessa takes a breath before announcing the next exercise.')
     parser.add_argument('--max_times', type=int, default=3, help='The number of exercises per day.')
-    parser.add_argument('--warn_before', type=int, default=6, help='Seconds, before exercise starts, you get a warning.')
-    parser.add_argument('--duration_exercise', type=int, action=ActionOperators(expr=('>', 15)), default=20, help='Seconds, duration of exercise.')
-    parser.add_argument('--music.dir', action=ActionPath(mode='dr'), default=Path(os.path.join(str(libPath.home()), 'Music/iTunes/iTunes Media/Music'), mode='dr'), help='The root folder of your music files.')
-    parser.add_argument('--music.vol', type=float, default=0.19, help='The volume of the music (exponential scale, where 0 is silent, 1 is normal, up to 255 for very loud.')
-    parser.add_argument('--finished_work_at', type=int, default=19, help='When are you finished with work and want to stop exercises.')
-    parser.add_argument('--min_pause', type=int, default=0, help='Minutes, minimum how long your break between exercises takes.')
-    parser.add_argument('--max_pause', type=int, default=0, help='Minutes, maximum how long your break between exercises takes.')
-    parser.add_argument('--silent', action=ActionYesNo, default=False, help='Wether you want to run Tessa in silent mode. Music is played anyway.')
-    parser.add_argument('--skip_intro', action=ActionYesNo, default=True, help='If you want to restart Tessa and skip the intro.')
+    parser.add_argument('--warn_before', type=int, default=6,
+                        help='Seconds, before exercise starts, you get a warning.')
+    parser.add_argument('--duration_exercise', type=int, action=ActionOperators(expr=('>', 15)), default=20,
+                        help='Seconds, duration of exercise.')
+    parser.add_argument('--music.dir', action=ActionPath(mode='dr'),
+                        default=Path(os.path.join(str(libPath.home()), 'Music/iTunes/iTunes Media/Music'), mode='dr'),
+                        help='The root folder of your music files.')
+    parser.add_argument('--music.vol', type=float, default=0.19,
+                        help='The volume of the music (exponential scale, where 0 is silent, 1 is normal, up to 255 for very loud.')
+    parser.add_argument('--finished_work_at', type=int, default=19,
+                        help='When are you finished with work and want to stop exercises.')
+    parser.add_argument('--min_pause', type=int, default=0,
+                        help='Minutes, minimum how long your break between exercises takes.')
+    parser.add_argument('--max_pause', type=int, default=0,
+                        help='Minutes, maximum how long your break between exercises takes.')
+    parser.add_argument('--silent', action=ActionYesNo, default=False,
+                        help='Wether you want to run Tessa in silent mode. Music is played anyway.')
+    parser.add_argument('--skip_intro', action=ActionYesNo, default=True,
+                        help='If you want to restart Tessa and skip the intro.')
     args = parser.parse_args()
 
     speech = Speech(args)
     music = Music(args)
+    start(args, speech, music)
+
+
+if __name__ == "__main__":
     main()

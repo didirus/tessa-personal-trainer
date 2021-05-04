@@ -2,6 +2,7 @@ import subprocess
 import random
 
 from utils import logger
+from utils.checks import in_call
 
 
 class Speech():
@@ -13,7 +14,7 @@ class Speech():
 
     def say(self, sentence):
         logger.info(f"Saying '{sentence[self.cfg.lang]}'.")
-        if not self.cfg.silent:
+        if not self.cfg.silent and not in_call():
             subprocess.call(['afplay', 'silence.wav'])
             subprocess.call(['say', '-v', f'{"Moira" if self.cfg.lang == "eng" else "Claire"}',  sentence[self.cfg.lang]])
 
@@ -154,6 +155,10 @@ class Speech():
         self.say(random.choice([
             {"eng": 'Nice. Thank you for your contribution.',
             "nl": "Super. Bedankt voor deze bijdrage."},
+            {"eng": 'An mhaith!',
+             "nl": 'Super.'},
+            {"eng": 'Fine work.',
+             "nl": 'Goedzo.'},
             {"eng": 'Great job! We just created new brain cells.',
             "nl": "Geweldig gedaan!"},
             {"eng": 'Awesome.',

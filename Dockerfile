@@ -8,7 +8,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 ## Install OS requirements ##
 RUN apt-get update --fix-missing \
  && apt-get dist-upgrade -y \
- && apt-get install -y --no-install-recommends \
+ && apt-get install -y --no-install-recommends python3-easygui \
       git vim build-essential less \
       nano \
       curl \
@@ -41,11 +41,8 @@ RUN locale-gen \
  de_DE.utf8
 
 COPY requirements.txt requirements.txt
-COPY pip.conf /etc/pip.conf
 
-RUN pip3 install -r requirements.txt; rm /etc/pip.conf requirements.txt
-RUN gem install asciidoctor
-RUN python3 -m nltk.downloader punkt -d /opt/didirus
+RUN pip3 install -r requirements.txt; rm requirements.txt
 
 COPY entrypoint.sh /opt/didirus/
 RUN chmod g+x /opt/didirus/entrypoint.sh

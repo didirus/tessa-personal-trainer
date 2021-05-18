@@ -56,7 +56,6 @@ RUN chown -R appuser /opt/didirus
 
 USER 1085
 WORKDIR /opt/didirus
-COPY config.yaml /opt/didirus/config.yaml
 
 RUN chmod 700 /opt/didirus/entrypoint.sh
 ENTRYPOINT ["./entrypoint.sh"]

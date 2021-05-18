@@ -6,8 +6,9 @@ import easygui
 from datetime import datetime
 import random
 
-from utils.speech import Speech
-from utils.music import Music
+from tessa.utils.speech import Speech
+from tessa.utils.music import Music
+from tessa.utils import logger
 
 
 def exercise_round(args, speech, music):
@@ -69,7 +70,8 @@ def start(args, speech, music):
     speech.closing()
 
 
-def main():
+def main(config_string):
+    logger.debug("Parsing arguments...")
     parser = ArgumentParser()
     parser.add_argument('--cfg', action=ActionConfigFile)
     parser.add_argument('--lang', choices=['eng', 'nl'], nargs='?', default='nl', help='The language you want to hear.')
@@ -78,7 +80,7 @@ def main():
     parser.add_argument('--max_times', type=int, default=3, help='The number of exercises per day.')
     parser.add_argument('--warn_before', type=int, default=6,
                         help='Seconds, before exercise starts, you get a warning.')
-    parser.add_argument('--duration_exercise', type=int, action=ActionOperators(expr=('>', 15)), default=20,
+    parser.add_argument('--duration_exercise', action=ActionOperators(expr=('>', 15)), default=20,
                         help='Seconds, duration of exercise.')
     parser.add_argument('--music.dir', action=ActionPath(mode='dr'),
                         default=Path(os.path.join(str(libPath.home()), 'Music/iTunes/iTunes Media/Music'), mode='dr'),
@@ -95,7 +97,7 @@ def main():
                         help='Wether you want to run Tessa in silent mode. Music is played anyway.')
     parser.add_argument('--skip_intro', action=ActionYesNo, default=True,
                         help='If you want to restart Tessa and skip the intro.')
-    args = parser.parse_args()
+    args = parser.parse_string(config_string)
 
     speech = Speech(args)
     music = Music(args)

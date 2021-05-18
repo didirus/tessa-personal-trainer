@@ -2,7 +2,7 @@ import os
 import random
 import subprocess
 
-from utils import logger
+from tessa.utils import logger
 
 
 class Music():

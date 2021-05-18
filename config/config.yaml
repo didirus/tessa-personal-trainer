@@ -6,7 +6,7 @@ duration_breath: 120  # seconds
 music:
 #  dir: /path/to/your/music/directory
   vol: 0.4
-finished_work_at: 19  # o'clock
+finished_work_at: 17  # o'clock
 min_pause: 15  # minutes
 max_pause: 30  # minutes
 silent: no

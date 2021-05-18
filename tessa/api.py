@@ -1,5 +1,7 @@
 from flask import Flask, Response, request, make_response
+import os
 
+from tessa.utils import logger
 from tessa.main import main
 
 app = Flask(__name__)
@@ -12,7 +14,11 @@ def health():
 
 @app.route("/start", methods=["POST"])
 def start_day():
-    main()
+    logger.debug("Starting personal trainer...")
+
+    config = request.files["cfg"].read().decode('utf-8')
+    main(config)
+    return Response("")
 
 
 if __name__ == "__main__":

@@ -3,6 +3,18 @@ If you are spending a lot of time on your computer, either home or in an office,
 
 <img src="tessa/files/superwoman.jpg" alt="superwoman" width="300"/>
 
+## Exercises
+- Squating
+- Planking
+- Wall-sitting
+- Arm-lifting
+- Upper-body stretching
+- Bottom-body stretching
+
+## Languages
+- English
+- Dutch
+
 ## Author
 Diede Rusticus (diede.rusticus@gmail.com)
 

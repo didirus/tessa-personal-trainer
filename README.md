@@ -7,7 +7,6 @@ If you are spending a lot of time on your computer, either home or in an office,
 Diede Rusticus (diede.rusticus@gmail.com)
 
 ## Prerequisites
-- For Mac only 
 - Make sure you have "Claire" and "Ava" downloaded as computer voices. 
   Go to `Settings > Accessibility > Spoken Content > System Voice > Customize` to download these voices. 
 

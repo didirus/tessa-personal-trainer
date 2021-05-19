@@ -1,7 +1,7 @@
 # Tessa, your personal trainer
 If you are spending a lot of time on your computer, either home or in an office, Tessa helps you do small exercises to relax your muscles. 
 
-![](tessa/files/superwoman.jpg)
+<img src="tessa/files/superwoman.jpg" alt="superwoman" width="100"/>
 
 NOTE: only compatible for Mac user for now.
 

@@ -1,6 +1,8 @@
 # Tessa, your personal trainer
 If you are spending a lot of time on your computer, either home or in an office, Tessa helps you do small exercises to relax your muscles. 
 
+![](tessa/files/superwoman.jpeg)
+
 NOTE: only compatible for Mac user for now.
 
 ## Author
@@ -8,12 +10,12 @@ Diede Rusticus (diede.rusticus@gmail.com)
 
 ## Prerequisites
 - For Mac only 
-- Make sure you have "Claire" and "Moira" downloaded as computer voices. 
-  Go to `Settings > Accessibility > Speech > Customize` to download these voices. 
+- Make sure you have "Claire" and "Ava" downloaded as computer voices. 
+  Go to `Settings > Accessibility > Spoken Content > System Voice > Customize` to download these voices. 
 
 ## How to use
 
-1. Install requirements (optionally: inside a virtual environment).
+1. Install requrements (optionally: inside a virtual environment).
 
     ```
     virtualenv venv  # optional
@@ -45,5 +47,5 @@ Diede Rusticus (diede.rusticus@gmail.com)
 3. Run Tessa.
 
     ```
-   python tessa/main.py --cfg config.yaml
+   python tessa/main.py --cfg config/config.yaml
    ```
